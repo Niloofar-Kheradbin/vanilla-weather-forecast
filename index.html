@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla Weather Forecast</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="mystyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <form id="search-form">
+            <dvi class="row">
+              <div class="col-9">
+                <input
+                  type="search"
+                  class="form-control"
+                  id="city"
+                  input-border-width="400rem"
+                  placeholder="Enter a city..."
+                  autocomplete="off"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  type="submit"
+                  class="btn btn-primary w-100"
+                  value="Search"
+                  placeholder="Search"
+                />
+              </div>
+            </dvi>
+          </form>
+          <div class="overview">
+            <h1></h1>
+            <ul>
+              <li>Last updated: <span id="time"></span></li>
+              <li id="description"></li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="weather-temperature">
+                <img src=".." alt="clear-sky" id="icon" /><strong
+                  id="temperature"
+                ></strong
+                ><span class="units"
+                  ><a href="#" class="active" id="to-celcius">℃</a> |<a
+                    href="#"
+                    class="to-farenheit"
+                    id="to-farenheit"
+                    >℉</a
+                  ></span
+                >
+              </div>
+            </div>
+            <div class="col">
+              <ul>
+                <li>Humidity: <span id="humidity">88</span>%</li>
+                <li>Wind: <span id="wind">4.92</span>km/h</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <small
+          >Developed by
+          <a
+            href="http://https://www.linkedin.com/in/niloofar-kheradbin-38957b151/?originalSubdomain=ir"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Niloofar Kheradbin</a
+          >
+          (open-sourced on
+          <a
+            href="http://https://github.com/Niloofar-Kheradbin/vanilla-weather-app"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub)</a
+          >
+        </small>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
