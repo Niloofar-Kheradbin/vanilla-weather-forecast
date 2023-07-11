@@ -18,7 +18,7 @@ li {
   line-height: 20px;
   color: #878787;
 }
-img {
+.temperature img {
   position: relative;
   margin-top: -30px;
   max-width: 70px;
@@ -64,4 +64,31 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+.forecast {
+  margin-top: 30px;
+  margin-left: 6px;
+}
+.forecast-day {
+  color: rgba(39, 33, 66, 0.4);
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: center;
+}
+.forecast-icon {
+  text-align: center;
+  max-width: 60px;
+}
+.forecast-temperatures {
+  color: #f65282;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.min-temperature {
+  color: cadetblue;
+  opacity: 0.6;
+  margin-left: 10px;
 }
