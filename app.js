@@ -40,7 +40,23 @@ function showTemp(response) {
     let temperature = document.querySelector("#temperature");
     temperature.innerHTML = Math.round(response.data.list[0].main.temp);
   }
-
+  function displayForecast() {
+    let forecastElement = document.querySelector("#display-forecast");
+    forecastElement.innerHTML = `<div class="row">
+                  <div class="col-2">
+                    <div class="forecast-day">Tuesday</div>
+                    <img
+                      src="img/snow-night.png"
+                      class="forecast-icon"
+                      alt="clear-sky"
+                    />
+                    <div class="forecast-temperatures">
+                      <span class="max-temperature">18º</span
+                      ><span class="min-temperature">12º</span>
+                    </div>
+                  </div>
+                </div>`;
+  }
   toCelcius.addEventListener("click", changeTocelcius);
   toFarenheit.addEventListener("click", changeTofarenheit);
 
@@ -54,6 +70,7 @@ function showTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.list[0].weather[0].description);
+  displayForecast();
 }
 
 function dateTime(timestamp) {
