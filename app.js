@@ -16,6 +16,7 @@ function handleSubmit(event) {
   axios.get(apiUrl).then(showTemp);
 }
 function showTemp(response) {
+  console.log(response.data);
   let time = document.querySelector("#time");
   let weatherDescription = document.querySelector("#description");
   let temperature = document.querySelector("#temperature");
@@ -44,15 +45,21 @@ function showTemp(response) {
     let forecastElement = document.querySelector("#display-forecast");
     forecastElement.innerHTML = `<div class="row">
                   <div class="col-2">
-                    <div class="forecast-day">Tuesday</div>
+                    <div class="forecast-day">${countForecastDay(
+                      timestamp
+                    )}</div>
                     <img
                       src="img/snow-night.png"
                       class="forecast-icon"
                       alt="clear-sky"
                     />
                     <div class="forecast-temperatures">
-                      <span class="max-temperature">18º</span
-                      ><span class="min-temperature">12º</span>
+                      <span class="max-temperature">${Math.round(
+                        response.data.list[0].main.temp_max
+                      )}º</span
+                      ><span class="min-temperature">${Math.round(
+                        response.data.list[0].main.temp_min
+                      )}º</span>
                     </div>
                   </div>
                 </div>`;
@@ -95,6 +102,20 @@ function dateTime(timestamp) {
   }
 
   return `${day} ${hour}:${minutes} `;
+}
+function countForecastDay(timestamp) {
+  let currentDay = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let forecastDay = days[currentDay.getDay() + 1];
+  return forecastDay;
 }
 
 let key = "9bb3c645e603b5a1074b400fa0498278";
