@@ -46,7 +46,7 @@ function showTemp(response) {
     forecastElement.innerHTML = `<div class="row">
                   <div class="col-2">
                     <div class="forecast-day">${countForecastDay(
-                      timestamp
+                      response.data.list[0].dt * 1000
                     )}</div>
                     <img
                       src="img/snow-night.png"
@@ -77,20 +77,13 @@ function showTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.list[0].weather[0].description);
-  displayForecast();
+  days.forEach((day) => {
+    displayForecast();
+  });
 }
 
 function dateTime(timestamp) {
   let today = new Date(timestamp);
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
   let day = days[today.getDay()];
   let hour = today.getHours();
   if (hour < 10) {
@@ -105,19 +98,18 @@ function dateTime(timestamp) {
 }
 function countForecastDay(timestamp) {
   let currentDay = new Date(timestamp);
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
   let forecastDay = days[currentDay.getDay() + 1];
   return forecastDay;
 }
-
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 let key = "9bb3c645e603b5a1074b400fa0498278";
 let searchForm = document.querySelector("#search-form");
 
