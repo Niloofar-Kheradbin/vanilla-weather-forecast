@@ -41,12 +41,12 @@ function showTemp(response) {
     let temperature = document.querySelector("#temperature");
     temperature.innerHTML = Math.round(response.data.list[0].main.temp);
   }
-  function displayForecast() {
+  function displayForecast(dayIndex) {
     let forecastElement = document.querySelector("#display-forecast");
     forecastElement.innerHTML = `<div class="row">
                   <div class="col-2">
                     <div class="forecast-day">${countForecastDay(
-                      response.data.list[0].dt * 1000
+                      response.data.list[dayIndex].dt * 1000
                     )}</div>
                     <img
                       src="img/snow-night.png"
@@ -55,10 +55,10 @@ function showTemp(response) {
                     />
                     <div class="forecast-temperatures">
                       <span class="max-temperature">${Math.round(
-                        response.data.list[0].main.temp_max
+                        response.data.list[dayIndex].main.temp_max
                       )}º</span
                       ><span class="min-temperature">${Math.round(
-                        response.data.list[0].main.temp_min
+                        response.data.list[dayIndex].main.temp_min
                       )}º</span>
                     </div>
                   </div>
@@ -77,7 +77,12 @@ function showTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.list[0].weather[0].description);
-  days.forEach((day) => {
+  response.data.list.forEach((indexNumber, index) => {
+    indexNumber = index + 8;
+    let dayIndex = response.data.list[indexNumber];
+    return dayIndex;
+  });
+  response.data.list.forEach(() => {
     displayForecast();
   });
 }
