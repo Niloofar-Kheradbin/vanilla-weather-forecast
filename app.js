@@ -41,29 +41,7 @@ function showTemp(response) {
     let temperature = document.querySelector("#temperature");
     temperature.innerHTML = Math.round(response.data.list[0].main.temp);
   }
-  function displayForecast(dayIndex) {
-    let forecastElement = document.querySelector("#display-forecast");
-    forecastElement.innerHTML = `<div class="row">
-                  <div class="col-2">
-                    <div class="forecast-day">${countForecastDay(
-                      response.data.list[dayIndex].dt * 1000
-                    )}</div>
-                    <img
-                      src="img/snow-night.png"
-                      class="forecast-icon"
-                      alt="clear-sky"
-                    />
-                    <div class="forecast-temperatures">
-                      <span class="max-temperature">${Math.round(
-                        response.data.list[dayIndex].main.temp_max
-                      )}º</span
-                      ><span class="min-temperature">${Math.round(
-                        response.data.list[dayIndex].main.temp_min
-                      )}º</span>
-                    </div>
-                  </div>
-                </div>`;
-  }
+
   toCelcius.addEventListener("click", changeTocelcius);
   toFarenheit.addEventListener("click", changeTofarenheit);
 
@@ -77,14 +55,35 @@ function showTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.list[0].weather[0].description);
-  response.data.list.forEach((indexNumber, index) => {
-    indexNumber = index + 8;
-    let dayIndex = response.data.list[indexNumber];
-    return dayIndex;
-  });
-  response.data.list.forEach(() => {
-    displayForecast();
-  });
+
+  //let dayIndex = response.data.list[indexNumber];
+  let forecastElement = document.querySelector("#display-forecast");
+  let forecastHTML = `<div class="row">`;
+  for (let index = 0; index < 41; index + 8) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                    <div class="forecast-day">${countForecastDay(
+                      response.data.list[index].dt * 1000
+                    )}</div>
+                    <img
+                      src="img/snow-night.png"
+                      class="forecast-icon"
+                      alt="clear-sky"
+                    />
+                    <div class="forecast-temperatures">
+                      <span class="max-temperature">${Math.round(
+                        response.data.list[index].main.temp_max
+                      )}º</span
+                      ><span class="min-temperature">${Math.round(
+                        response.data.list[index].main.temp_min
+                      )}º</span>
+                    </div>
+                  </div>
+                </div>`;
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+  }
 }
 
 function dateTime(timestamp) {
