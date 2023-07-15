@@ -55,14 +55,14 @@ function showTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.list[0].weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.list[0].weather[0].description);
-
-  //let dayIndex = response.data.list[indexNumber];
-  let forecastElement = document.querySelector("#display-forecast");
-  let forecastHTML = `<div class="row">`;
-  for (let index = 0; index < 41; index + 8) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
+  function displayForecast() {
+    //let dayIndex = response.data.list[indexNumber];
+    let forecastElement = document.querySelector("#display-forecast");
+    let forecastHTML = `<div class="row">`;
+    for (let index = 8; index < 41; index + 8) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
                     <div class="forecast-day">${countForecastDay(
                       response.data.list[index].dt * 1000
                     )}</div>
@@ -79,11 +79,12 @@ function showTemp(response) {
                         response.data.list[index].main.temp_min
                       )}º</span>
                     </div>
-                  </div>
-                </div>`;
+                  </div>`;
+    }
     forecastHTML = forecastHTML + `</div>`;
     forecastElement.innerHTML = forecastHTML;
   }
+  displayForecast();
 }
 
 function dateTime(timestamp) {
