@@ -33,30 +33,9 @@ function showTemp(response1) {
   let time = document.querySelector("#time");
   let weatherDescription = document.querySelector("#description");
   let temperature = document.querySelector("#temperature");
-  let toFarenheit = document.querySelector("#to-farenheit");
-  let toCelcius = document.querySelector("#to-celcius");
   let humidity = document.querySelector("#humidity");
   let wind = document.querySelector("#wind");
   let icon = document.querySelector("#icon");
-
-  function changeTofarenheit(event) {
-    toFarenheit.classList.add("active");
-    toCelcius.classList.remove("active");
-    event.preventDefault();
-    let temperature = document.querySelector("#temperature");
-    temperature.innerHTML =
-      Math.round(Math.round(response1.data.list[0].main.temp) * 1.8) + 32;
-  }
-  function changeTocelcius(event) {
-    event.preventDefault();
-    toCelcius.classList.add("active");
-    toFarenheit.classList.remove("active");
-    let temperature = document.querySelector("#temperature");
-    temperature.innerHTML = Math.round(response1.data.list[0].main.temp);
-  }
-
-  toCelcius.addEventListener("click", changeTocelcius);
-  toFarenheit.addEventListener("click", changeTofarenheit);
 
   time.innerHTML = dateTime(response1.data.list[0].dt_txt);
   weatherDescription.innerHTML = response1.data.list[0].weather[0].description;
@@ -71,7 +50,6 @@ function showTemp(response1) {
 }
 function displayForecast(response1) {
   let forecast = response1.data.list;
-  //let dayIndex = response.data.list[indexNumber];
   let forecastElement = document.querySelector("#display-forecast");
   let forecastHTML = `<div class="row">`;
   for (index = 0; index < forecast.length; index += 8) {
