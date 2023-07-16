@@ -30,7 +30,6 @@ function handleSubmit(event) {
     });
 }
 function showTemp(response1) {
-  console.log(response1.data);
   let time = document.querySelector("#time");
   let weatherDescription = document.querySelector("#description");
   let temperature = document.querySelector("#temperature");
@@ -59,7 +58,7 @@ function showTemp(response1) {
   toCelcius.addEventListener("click", changeTocelcius);
   toFarenheit.addEventListener("click", changeTofarenheit);
 
-  time.innerHTML = dateTime(response1.data.list[0].dt * 1000);
+  time.innerHTML = dateTime(response1.data.list[0].dt_txt);
   weatherDescription.innerHTML = response1.data.list[0].weather[0].description;
   temperature.innerHTML = Math.round(response1.data.list[0].main.temp);
   humidity.innerHTML = response1.data.list[0].main.humidity;
