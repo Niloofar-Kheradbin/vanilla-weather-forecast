@@ -3,18 +3,12 @@ function defaultSearch(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`;
 
   cityValue.innerHTML = city;
-  axios
-    .all([
-      axios.get(apiUrl),
-      // Add another axios request here as needed
-    ])
-    .then(
-      axios.spread(function (response1, response2) {
-        // Handle the responses separately in the provided functions
-        showTemp(response1);
-        displayForecast(response2);
-      })
-    );
+
+  axios.get(apiUrl).then(function (response1) {
+    // Handle the responses separately in the provided functions
+    showTemp(response1);
+    displayForecast(response1);
+  });
 }
 
 function handleSubmit(event) {
@@ -24,18 +18,16 @@ function handleSubmit(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city.value}&appid=${key}&units=metric`;
 
   cityValue.innerHTML = city.value;
+
   axios
-    .all([
-      axios.get(apiUrl),
-      // Add another axios request here as needed
-    ])
-    .then(
-      axios.spread(function (response1, response2) {
-        // Handle the responses separately in the provided functions
-        showTemp(response1);
-        displayForecast(response2);
-      })
-    );
+    .get(apiUrl)
+    // Add another axios request here as needed
+
+    .then(function (response1) {
+      // Handle the responses separately in the provided functions
+      showTemp(response1);
+      displayForecast(response1);
+    });
 }
 function showTemp(response1) {
   console.log(response1.data);
@@ -78,20 +70,22 @@ function showTemp(response1) {
   );
   icon.setAttribute("alt", response1.data.list[0].weather[0].description);
 }
-function displayForecast(response2) {
-  let forecast = response2.data.list;
+function displayForecast(response1) {
+  let forecast = response1.data.list;
   //let dayIndex = response.data.list[indexNumber];
   let forecastElement = document.querySelector("#display-forecast");
   let forecastHTML = `<div class="row">`;
-  for (index = 8; index < 41; index += 8) {
+  for (index = 0; index < forecast.length; index += 8) {
     forecastHTML =
       forecastHTML +
-      `<div class="col-2">
+      `<div class="col">
                     <div class="forecast-day">${countForecastDay(
                       forecast[index].dt * 1000
                     )}</div>
                     <img
-                      src="img/snow-night.png"
+                      src="https://openweathermap.org/img/wn/${
+                        forecast[index].weather[0].icon
+                      }@2x.png"
                       class="forecast-icon"
                       alt="clear-sky"
                     />
@@ -104,9 +98,9 @@ function displayForecast(response2) {
                       )}º</span>
                     </div>
                   </div>`;
-    forecastHTML = forecastHTML + `</div>`;
-    forecastElement.innerHTML = forecastHTML;
   }
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 function dateTime(timestamp) {
   let today = new Date(timestamp);

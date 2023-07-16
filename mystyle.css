@@ -27,14 +27,14 @@ li {
   font-size: 44px;
 }
 .weather-app-wrapper {
-  max-width: 600px;
+  max-width: 700px;
   margin: 30px auto;
 }
 .weather-app {
   padding: 20px;
   border: 1px solid #dadde1;
   border-radius: 5px;
-  max-width: 600px;
+  max-width: 700px;
 }
 .overview {
   margin-bottom: 30px;
@@ -67,7 +67,7 @@ a:hover {
 }
 .forecast {
   margin-top: 30px;
-  margin-left: 6px;
+  text-align: center;
 }
 .forecast-day {
   color: rgba(39, 33, 66, 0.4);
